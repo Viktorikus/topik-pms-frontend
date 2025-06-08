@@ -10,13 +10,22 @@ const LoginForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Contoh: Panggil API login
-        const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        });
-        const { token } = await response.json();
-        login(token);
+        try {
+            const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+            });
+            
+            if (!response.ok) throw new Error('Login gagal');
+            
+            const { token, user } = await response.json(); // Pastikan backend mengembalikan data user
+            login(token, user); // Kirim token dan data user
+        } catch (error) {
+            setError(error instanceof Error ? error.message : 'Login gagal');
+        }
     };
 
     return (
@@ -39,3 +48,7 @@ const LoginForm = () => {
 }
 
 export default LoginForm;
+
+function setError(arg0: string) {
+    throw new Error('Function not implemented.');
+}
