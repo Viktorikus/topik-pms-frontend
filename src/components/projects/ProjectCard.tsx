@@ -13,7 +13,7 @@ const ProjectCard = ({
       <h3>{project.name}</h3>
       <p>{project.description || 'No description'}</p>
       <div className={styles.meta}>
-        <span>Tasks: {project.tasksCount || 0}</span>
+        <span>Tasks: {project.tasks_count || 0}</span>
       </div>
     </div>
   );
