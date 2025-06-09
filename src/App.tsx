@@ -7,8 +7,8 @@ import Navbar from './components/common/Navbar';
 function App() {
   return (
     <AuthProvider>
-      <Navbar />
       <Router>
+        <Navbar /> {/* ✅ Sekarang berada di dalam Router */}
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/login" element={<LoginForm />} />
